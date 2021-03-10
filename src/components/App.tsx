@@ -1,9 +1,14 @@
+import MomentUtils from "@date-io/moment";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import React from "react";
+import Calendar from "./Calendar";
 
 const App = () => {
     return (
         <div>
-            <h1>Hello World</h1>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+                <Calendar />
+            </MuiPickersUtilsProvider>
         </div>
     );
 };
