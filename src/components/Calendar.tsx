@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { useStaticState, Calendar as CalendarUI } from "@material-ui/pickers";
 import {
     createMuiTheme,

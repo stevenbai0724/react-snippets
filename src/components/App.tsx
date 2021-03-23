@@ -1,18 +1,22 @@
-import MomentUtils from "@date-io/moment";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import React from "react";
+import React, { useState } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { dashboardContext, intialDashboard } from "../context/dashboardContext";
+import Dashboard from "../views/Dashboard";
 import Header from "./Header/Header";
-import Calendar from "./Calendar";
 import Card from "./Card";
 import { Grid } from "@material-ui/core"
 
 const App = () => {
+    const [dashboard, setDashboard] = useState(intialDashboard);
+    const provider = { ...dashboard, setDashboard };
     return (
-        <div >
-        <Header />
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-                <Calendar />
-            </MuiPickersUtilsProvider>
+        <div>
+            <Router>
+                <dashboardContext.Provider value={provider}>
+                    <Header />
+                    <Dashboard />
+                </dashboardContext.Provider>
+            </Router>
             <Grid container style={{paddingLeft: 531, gridGap: 24, background: "#E5E5E5"}}>
                 <Card />
                 <Card />
