@@ -33,7 +33,6 @@
     "scripts": {
         "start": "NODE_ENV=dev react-scripts start",
         "build": "react-scripts build",
-        "postinstall": "npm install -g serve",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
