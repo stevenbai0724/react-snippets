@@ -18,15 +18,10 @@ const useStyle = makeStyles((theme) => ({
     },
 }));
 
-type FilterMenuProps = {
-    options: string[];
-};
-
-const FilterMenu = ({ options }: FilterMenuProps) => {
+const FilterMenu = ({ options, selected, setSelected }: any) => {
     const classes = useStyle();
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [selected, setSelected] = useState(0);
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -36,7 +31,7 @@ const FilterMenu = ({ options }: FilterMenuProps) => {
         setAnchorEl(null);
     };
 
-    const handleSelect = (e: MouseEvent<HTMLElement>, i: number) => {
+    const handleSelect = (e: MouseEvent<HTMLElement>, i: string) => {
         setSelected(i);
         handleClose();
     };
@@ -59,17 +54,15 @@ const FilterMenu = ({ options }: FilterMenuProps) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                {options.map((option: string, i: number) => {
-                    return (
-                        <MenuItem
-                            key={option}
-                            selected={i === selected}
-                            onClick={(e) => handleSelect(e, i)}
-                        >
-                            {option}
-                        </MenuItem>
-                    );
-                })}
+                {Object.keys(options).map((key: string) => (
+                    <MenuItem
+                        key={key}
+                        selected={key === selected}
+                        onClick={(e) => handleSelect(e, key)}
+                    >
+                        {options[key]}
+                    </MenuItem>
+                ))}
             </Menu>
         </div>
     );

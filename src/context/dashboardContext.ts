@@ -1,27 +1,27 @@
 import { createContext } from "react";
 
 export const intialDashboard = {
-    sortBy: "",
-    date: "",
+    sortBy: "des",
+    date: new Date(),
     searchQuery: "",
-    opportunityType: "",
+    opportunityType: "all",
 };
 
-type DashboardContextType = {
-    sortBy: string;
-    date: string;
-    searchQuery: string;
-    opportunityType: string;
-    setDashboard: React.Dispatch<
-        React.SetStateAction<{
-            sortBy: string;
-            date: string;
-            searchQuery: string;
-            opportunityType: string;
-        }>
-    >;
-};
+// type DashboardContextType = {
+//     dashboard: {
+//         sortBy: string;
+//         date: string;
+//         searchQuery: string;
+//         opportunityType: string;
+//     };
+//     setDashboard: React.Dispatch<
+//         React.SetStateAction<{
+//             sortBy: string;
+//             date: string;
+//             searchQuery: string;
+//             opportunityType: string;
+//         }>
+//     >;
+// };
 
-export const dashboardContext = createContext<DashboardContextType | null>(
-    null
-);
+export const dashboardContext = createContext<any>(null);

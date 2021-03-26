@@ -3,10 +3,10 @@ interface EventQuery {
     location?: string;
     address?: string;
     distance?: number;
-    beginningDate?: Date;
+    startDate?: Date;
     endDate?: Date;
     interests?: string[];
-    sortingType?: string;
+    order?: string;
     type?: string;
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,6 +8,7 @@ import { createStyles, InputBase, makeStyles, Theme } from "@material-ui/core";
 import FilterMenu from "./FilterMenu";
 import "../assets/css/Header.css";
 import img from "../assets/images/ccs_logo_fb 1.png";
+import { dashboardContext } from "../context/dashboardContext";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -82,6 +83,27 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Header = () => {
     const classes = useStyles();
+
+    const sortByOptions = { des: "Newest", asc: "Oldest" };
+    const typeOptions = {
+        all: "All Events",
+        live: "Live Events",
+        draft: "Draft Events",
+        past: "Past Events",
+    };
+
+    const context = useContext(dashboardContext);
+    const { dashboard, setDashboard } = context;
+    const { opportunityType, sortBy } = dashboard;
+
+    const typeSelected = (type: string) => {
+        setDashboard({ ...dashboard, opportunityType: type });
+    };
+
+    const sortBySelected = (sortBy: string) => {
+        setDashboard({ ...dashboard, sortBy });
+    };
+
     return (
         <>
             <div className={classes.grow}>
@@ -121,13 +143,15 @@ const Header = () => {
                             </button>
                             <div className={classes.grow} />
                             <div className={classes.sectionDesktop}>
-                                <FilterMenu options={["Newest", "Oldest"]} />
                                 <FilterMenu
-                                    options={[
-                                        "Live Events",
-                                        "Draft Events",
-                                        "Past Events",
-                                    ]}
+                                    options={sortByOptions}
+                                    selected={sortBy}
+                                    setSelected={sortBySelected}
+                                />
+                                <FilterMenu
+                                    options={typeOptions}
+                                    selected={opportunityType}
+                                    setSelected={typeSelected}
                                 />
                             </div>
                         </Toolbar>

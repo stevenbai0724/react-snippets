@@ -14,16 +14,16 @@ const useStyles = makeStyles({
 const App = () => {
     const classes = useStyles();
     const [dashboard, setDashboard] = useState(intialDashboard);
-    const provider = { ...dashboard, setDashboard };
+
     return (
         <div className={classes.root}>
             <Router>
-                <Header />
-                <Container fixed>
-                    <dashboardContext.Provider value={provider}>
+                <dashboardContext.Provider value={{ dashboard, setDashboard }}>
+                    <Header />
+                    <Container fixed>
                         <Dashboard />
-                    </dashboardContext.Provider>
-                </Container>
+                    </Container>
+                </dashboardContext.Provider>
             </Router>
         </div>
     );
