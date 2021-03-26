@@ -63,20 +63,15 @@ const calendarTheme = createMuiTheme({
     },
 });
 
-const Calendar = () => {
+const Calendar = ({ daysHaveOpportunities }: any) => {
     const classes = useStyle();
     const [selectedDate, setSelectedDate] = useState(new Date());
-
-    const daysHaveOpportunities = [
-        new Date("2021-03-01T21:39:46.819Z").toDateString(),
-        new Date("2021-03-28T21:39:46.819Z").toDateString(),
-    ];
 
     const handleDateChange = (date: any) => {
         setSelectedDate(date);
     };
 
-    console.log(selectedDate.toJSON());
+    // console.log(selectedDate.toJSON());
 
     const { pickerProps, wrapperProps } = useStaticState({
         value: selectedDate,

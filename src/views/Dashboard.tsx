@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MomentUtils from "@date-io/moment";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import Calendar from "../components/Calendar";
@@ -11,6 +11,8 @@ import {
 } from "../http/utils";
 import OpportunityCard from "../components/OpportunityCard";
 import { Grid, List, ListItem, Typography } from "@material-ui/core";
+import { uniqueId } from "lodash";
+import { dashboardContext } from "../context/dashboardContext";
 
 const Dashboard = () => {
     // this blocked is used only before login/register portal built up, delete later
@@ -23,6 +25,11 @@ const Dashboard = () => {
         role: "organization",
     };
 
+    const context = useContext(dashboardContext);
+    const {
+        dashboard: { opportunityType, sortBy },
+    } = context;
+
     useEffect(() => {
         const r = async () => {
             try {
@@ -31,7 +38,8 @@ const Dashboard = () => {
                 } = await API.login(userAuth);
 
                 const query = {
-                    type: "past",
+                    type: opportunityType,
+                    order: sortBy,
                 };
                 setAccessToken(accessToken);
                 setRefreshToken(refreshToken);
@@ -43,26 +51,33 @@ const Dashboard = () => {
             }
         };
         r();
-    }, []);
+    }, [context]);
     // delete later block end
     console.log(events);
+
+    const daysHaveOpportunities = events.map(({ start }) =>
+        new Date(start).toDateString()
+    );
 
     return (
         <div>
             <MuiPickersUtilsProvider utils={MomentUtils}>
                 <Grid container>
                     <Grid item lg={3}>
-                        <Calendar />
+                        <br />
+                        <Calendar
+                            daysHaveOpportunities={daysHaveOpportunities}
+                        />
                     </Grid>
                     <Grid item lg={9}>
                         <List>
                             <ListItem>
-                                <Typography variant="h4">
+                                <Typography variant="h3">
                                     Your Opportunities
                                 </Typography>
                             </ListItem>
                             {events.map((opportunity) => (
-                                <ListItem>
+                                <ListItem key={uniqueId()}>
                                     <OpportunityCard
                                         opportunity={opportunity}
                                     />
