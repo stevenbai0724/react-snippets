@@ -1,23 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
 import MomentUtils from "@date-io/moment";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import Calendar from "../components/Calendar";
-import API from "../http";
+import { Grid, List, ListItem, Typography } from "@material-ui/core";
+import { uniqueId } from "lodash";
 import {
+    configApiRequestToken,
+    configAuthToken,
     getAccessToken,
     getRefreshBody,
     setAccessToken,
+    login,
+    searchEvent,
     setRefreshToken,
-} from "../http/utils";
+} from "@icontribute-founder/api-wrapper";
+import Calendar from "../components/Calendar";
 import OpportunityCard from "../components/OpportunityCard";
-import { Grid, List, ListItem, Typography } from "@material-ui/core";
-import { uniqueId } from "lodash";
 import { dashboardContext } from "../context/dashboardContext";
 
 const Dashboard = () => {
     // this blocked is used only before login/register portal built up, delete later
-    API.configApiRequestToken(getAccessToken);
-    API.configAuthToken(getRefreshBody, setAccessToken);
+    configApiRequestToken(getAccessToken);
+    configAuthToken(getRefreshBody, setAccessToken);
     const [events, setEvents] = useState([]);
     const userAuth = {
         email: "organization@email.com",
@@ -35,7 +38,7 @@ const Dashboard = () => {
             try {
                 const {
                     data: { accessToken, refreshToken },
-                } = await API.login(userAuth);
+                } = await login(userAuth);
 
                 const query = {
                     type: opportunityType,
@@ -44,7 +47,7 @@ const Dashboard = () => {
                 setAccessToken(accessToken);
                 setRefreshToken(refreshToken);
 
-                const { data: events } = await API.searchEvent(query);
+                const { data: events } = await searchEvent(query);
                 setEvents(events);
             } catch (error) {
                 console.log(error);
