@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { dashboardContext, intialDashboard } from "../context/dashboardContext";
 import Dashboard from "../views/Dashboard";
 import Header from "./Header";
+import OpportunityDetails from "../views/OpportunityDetails";
 
 const useStyles = makeStyles({
     root: {
@@ -21,7 +22,8 @@ const App = () => {
                 <dashboardContext.Provider value={{ dashboard, setDashboard }}>
                     <Header />
                     <Container fixed>
-                        <Dashboard />
+                        {/* <Dashboard /> */}
+                        <OpportunityDetails />
                     </Container>
                 </dashboardContext.Provider>
             </Router>

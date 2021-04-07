@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-const Header = () => {
+const Header = ({ isDashboard }: any) => {
     const classes = useStyles();
 
     const sortByOptions = { des: "Newest", asc: "Oldest" };
@@ -112,7 +112,9 @@ const Header = () => {
                         <Toolbar>
                             <div className="logo">
                                 <h1>iContribute</h1>
-                                <h3>We rise by lifting others.</h3>
+                                <h3 style={{ marginBottom: "2px" }}>
+                                    We rise by lifting others.
+                                </h3>
                             </div>
                             <div className={classes.search}>
                                 <div className={classes.searchIcon}>
@@ -137,24 +139,28 @@ const Header = () => {
                                 <img id="profile-pic" src={img} alt="" />
                             </div>
                         </Toolbar>
-                        <Toolbar>
-                            <button className={classes.button}>
-                                Create Opportunity
-                            </button>
-                            <div className={classes.grow} />
-                            <div className={classes.sectionDesktop}>
-                                <FilterMenu
-                                    options={sortByOptions}
-                                    selected={sortBy}
-                                    setSelected={sortBySelected}
-                                />
-                                <FilterMenu
-                                    options={typeOptions}
-                                    selected={opportunityType}
-                                    setSelected={typeSelected}
-                                />
-                            </div>
-                        </Toolbar>
+                        {isDashboard ? (
+                            <Toolbar>
+                                <button className={classes.button}>
+                                    Create Opportunity
+                                </button>
+                                <div className={classes.grow} />
+                                <div className={classes.sectionDesktop}>
+                                    <FilterMenu
+                                        options={sortByOptions}
+                                        selected={sortBy}
+                                        setSelected={sortBySelected}
+                                    />
+                                    <FilterMenu
+                                        options={typeOptions}
+                                        selected={opportunityType}
+                                        setSelected={typeSelected}
+                                    />
+                                </div>
+                            </Toolbar>
+                        ) : (
+                            ""
+                        )}
                     </Container>
                 </AppBar>
             </div>
