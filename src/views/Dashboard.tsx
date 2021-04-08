@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import MomentUtils from "@date-io/moment";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import Calendar from "../components/Calendar";
+
 import API from "../http";
 import {
     getAccessToken,
@@ -53,7 +54,6 @@ const Dashboard = () => {
         r();
     }, [context]);
     // delete later block end
-    console.log(events);
 
     const daysHaveOpportunities = events.map(({ start }) =>
         new Date(start).toDateString()

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
+import TextField from '@material-ui/core/TextField';
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
+import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -12,10 +13,12 @@ const useStyles = makeStyles((theme: Theme) =>
             borderRadius: 12,
             display: "flex",
             padding: 18,
-            margin: "auto",
-            // maxWidth: 1000,
-            width: "100%",
+            margin: "15px",
+            width: "40%",
             boxShadow: "0px 4px 20px rgba(80, 80, 80, 0.1)",
+            "&:hover": {
+                boxShadow: "0px 4px 20px rgba(25, 180, 204, 0.5)",
+            },
         },
         details: {
             display: "flex",
@@ -39,91 +42,82 @@ const useStyles = makeStyles((theme: Theme) =>
         },
 
         font: {
-            fontSize: "20px",
+            fontSize: "40px",
         },
         button: {
-            backgroundColor: "#026896",
-            borderRadius: "24px",
+            backgroundColor: "white",
+            borderRadius: "20px",
             "&:hover": {
                 cursor: "pointer",
             },
-            color: "white",
-            border: "none",
+            color: "#026896",
+            border: "3px solid #026896",
             fontSize: "16px",
             padding: "16px",
             paddingLeft: "50px",
             paddingRight: "50px",
             fontWeight: 600,
+            width: "80%",
+            marginTop:"20px",
+            margin: "auto"
         },
+        buttonPressed: {
+            backgroundColor: "#026896",
+            borderRadius: "20px",
+            "&:hover": {
+                cursor: "pointer",
+            },
+            color: "white",
+            border: "3px solid #026896",
+            fontSize: "16px",
+            padding: "16px",
+            paddingLeft: "50px",
+            paddingRight: "50px",
+            fontWeight: 600,
+            width: "80%",
+            marginTop:"20px",
+            margin: "auto"
+        },
+        input: {
+            border: "3px solid #026896",
+            borderRadius: "24px",
+        }
     })
 );
 
-function getDateString(date: Date) {
-    const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-    ];
-    const [m, d, y] = new Date(date).toLocaleDateString().split("/");
-
-    return `${months[Number(m) - 1]} ${d}, ${y}`;
-}
-const image =
-    "https://www.baywardbulletin.ca/wp-content/uploads/2019/07/Bluesfest-873x436.jpg";
-export default function OpportunityCard({ opportunity: content }: any) {
+const ApplicationCard = ({ content }: any) => {
     const classes = useStyles();
-    const { companyName, eventName, subtitle, address, start } = content;
-    return (
-        <Card className={classes.root}>
-            <CardMedia
-                className={classes.media}
-                image={image}
-                title="Contemplative Reptile"
-            />
+    const [clicked, setClicked] = useState(false);
 
-            <div className={classes.details}>
+    const handleClick = () => {
+        setClicked(!clicked)
+    }
+    
+    return (
+        <Card className={classes.root} onClick={handleClick}>
+
+            <div className={classes.details}> 
                 <CardContent>
-                    <Typography
-                        component="h2"
-                        variant="h2"
-                        color="textSecondary"
-                        className={classes.date}
-                    >
-                        {getDateString(start)}
-                    </Typography>
                     <Typography
                         component="h5"
                         variant="h5"
                         className={classes.font}
                     >
-                        <strong>{eventName}</strong> | {subtitle}
+                        {content.header}
                     </Typography>
 
                     <br />
                     <Typography variant="subtitle1" className={classes.font16}>
-                        {companyName}
-                    </Typography>
-                    <Typography
-                        variant="subtitle1"
-                        color="textSecondary"
-                        className={classes.font16}
-                    >
-                        {address}
+                        {content.details}
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <button className={classes.button}>View Event</button>
+                    <button className={clicked ? classes.buttonPressed : classes.button}>{content.button}</button>
                 </CardActions>
+                <Input disabled={true} className={classes.input} disableUnderline={true}></Input>
             </div>
         </Card>
     );
 }
+
+export default ApplicationCard
