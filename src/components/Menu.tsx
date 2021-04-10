@@ -17,7 +17,7 @@ const RepeatTypeMenuButton = styled(ButtonBase)`
     justify-content: space-between;
     margin: 0px;
     * {
-        margin: 0px;
+        margin: 0px !important;
     }
 `;
 

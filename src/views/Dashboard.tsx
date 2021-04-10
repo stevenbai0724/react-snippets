@@ -16,6 +16,7 @@ import {
 import Calendar from "../components/Calendar";
 import OpportunityCard from "../components/OpportunityCard";
 import { dashboardContext } from "../context/dashboardContext";
+import { dashboardCalendarTheme } from "../themes";
 
 const Dashboard = () => {
     // this blocked is used only before login/register portal built up, delete later
@@ -70,6 +71,7 @@ const Dashboard = () => {
                         <br />
                         <Calendar
                             daysHaveOpportunities={daysHaveOpportunities}
+                            theme={dashboardCalendarTheme}
                         />
                     </Grid>
                     <Grid item lg={9}>

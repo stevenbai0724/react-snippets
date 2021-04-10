@@ -38,30 +38,30 @@ const StyledSubtitle = styled.h5`
 
 const OpportunityDetails = () => {
     const [shifts, setShifts] = useState([
-        {
-            start: new Date(),
-            end: new Date(),
-            type: "Does not Repeat",
-            name: "TEST 1",
-        },
-        {
-            start: new Date(),
-            end: new Date(),
-            type: "Does not Repeat",
-            name: "TEST 2",
-        },
-        {
-            start: new Date(),
-            end: new Date(),
-            type: "Does not Repeat",
-            name: "TEST 3",
-        },
-        {
-            start: new Date(),
-            end: new Date(),
-            type: "Does not Repeat",
-            name: "TEST 4",
-        },
+        // {
+        //     start: new Date(),
+        //     end: new Date(),
+        //     type: "Does not Repeat",
+        //     name: "Shift 1",
+        // },
+        // {
+        //     start: new Date(),
+        //     end: new Date(),
+        //     type: "Does not Repeat",
+        //     name: "Shift 2",
+        // },
+        // {
+        //     start: new Date(),
+        //     end: new Date(),
+        //     type: "Does not Repeat",
+        //     name: "Shift 3",
+        // },
+        // {
+        //     start: new Date(),
+        //     end: new Date(),
+        //     type: "Does not Repeat",
+        //     name: "Shift 4",
+        // },
     ]);
 
     return (

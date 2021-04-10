@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { StyledBackground } from "./WidgetPaper";
-import Datepicker from "../components/Datepicker";
 import Menu from "./Menu";
 import TrashButton from "./TrashButton";
 import { clone, pullAt, uniqueId } from "lodash";
+import DateTimeRangePicker from "./DateTimeRangePicker";
 
 const StyledButton = styled.button`
     padding: 15px;
@@ -61,11 +61,6 @@ const ShiftContent = styled.div`
     margin-top: 30px;
 `;
 
-const StartEndDates = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
-
 interface props {
     isNewShift?: boolean;
     setShifts: any;
@@ -89,23 +84,31 @@ const ShiftCard = ({ isNewShift = false, setShifts, shifts, i = 0 }: props) => {
                     <TrashButton onClick={handleDelete} />
                 </ShiftHeader>
                 <ShiftContent>
-                    <StartEndDates>
-                        <Datepicker label={"sdfsd"} date={start} />
-                        <Datepicker label={"sdfsd"} data={end} />
-                    </StartEndDates>
+                    <DateTimeRangePicker
+                        start={start}
+                        end={end}
+                        timePickerStart={9}
+                        timePickerEnd={12}
+                        timePickerGap={30}
+                    />
                 </ShiftContent>
                 <Menu>{type}</Menu>
             </ShiftCardBackground>
         );
     } else {
         const hanldeNewShiftButtonClick = () => {
+            const start = new Date();
+            const end = new Date();
+            start.setHours(9, 0, 0);
+            end.setHours(9, 30, 0);
+
             setShifts([
                 ...shifts,
                 {
-                    start: new Date(),
-                    end: new Date(),
+                    start,
+                    end,
                     type: "Does not Repeat",
-                    name: `TEST ${uniqueId("ppp")}`,
+                    name: `Shift ${shifts.length + 1}`,
                 },
             ]);
         };
