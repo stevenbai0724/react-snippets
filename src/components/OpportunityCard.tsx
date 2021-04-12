@@ -81,8 +81,6 @@ const image =
     "https://www.baywardbulletin.ca/wp-content/uploads/2019/07/Bluesfest-873x436.jpg";
 export default function OpportunityCard({ opportunity: content }: any) {
     const classes = useStyles();
-    console.log(content);
-
     const { companyName, eventName, subtitle, address, start } = content;
     return (
         <Card className={classes.root}>

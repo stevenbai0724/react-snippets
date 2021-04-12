@@ -3,6 +3,9 @@ import MomentUtils from "@date-io/moment";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Grid, List, ListItem, Typography } from "@material-ui/core";
 import { uniqueId } from "lodash";
+import Calendar from "../components/Calendar";
+import API from "../http";
+
 import {
     configApiRequestToken,
     configAuthToken,
@@ -57,7 +60,6 @@ const Dashboard = () => {
         r();
     }, [context]);
     // delete later block end
-    console.log(events);
 
     const daysHaveOpportunities = events.map(({ start }) =>
         new Date(start).toDateString()
