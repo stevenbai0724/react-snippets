@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Container from "@material-ui/core/Container";
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-const Header = ({ isDashboard }: any) => {
+const Header = ({ showFilter = true }) => {
     const classes = useStyles();
 
     const sortByOptions = { des: "Newest", asc: "Oldest" };
@@ -102,6 +102,11 @@ const Header = ({ isDashboard }: any) => {
 
     const sortBySelected = (sortBy: string) => {
         setDashboard({ ...dashboard, sortBy });
+    };
+
+    const history = useHistory();
+    const handleCreateOpportunityClick = () => {
+        history.push("/new-opportunity");
     };
 
     return (
@@ -139,9 +144,12 @@ const Header = ({ isDashboard }: any) => {
                                 <img id="profile-pic" src={img} alt="" />
                             </div>
                         </Toolbar>
-                        {isDashboard ? (
+                        {showFilter ? (
                             <Toolbar>
-                                <button className={classes.button}>
+                                <button
+                                    className={classes.button}
+                                    onClick={handleCreateOpportunityClick}
+                                >
                                     Create Opportunity
                                 </button>
                                 <div className={classes.grow} />
