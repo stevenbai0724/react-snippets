@@ -20,7 +20,7 @@ const DateWithDot = styled.div`
     height: 0;
     width: 0;
     border: 3px solid;
-    border-radius: 5;
+    border-radius: 5px;
     border-color: #ffbc03;
     right: 45.5%;
     transform: translateX(1px);

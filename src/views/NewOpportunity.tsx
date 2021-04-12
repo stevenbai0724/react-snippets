@@ -2,7 +2,10 @@ import { clone } from "lodash";
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
+import ApplicationDetails from "../components/ApplicationDetail/ApplicationDetail";
+import OpportunityDetails from "./OpportunityDetails";
 import Stepper from "../components/Stepper";
+import { Grid } from "@material-ui/core";
 
 const NewOpportunityContainer = styled.div`
     margin-top: 30px;
@@ -12,13 +15,15 @@ const NewOpportunityContainer = styled.div`
 
 const NewOpportunitySide = styled.div`
     position: fixed;
+    margin-top: 20px;
+    margin-left: 20px;
 `;
 
 const NewOpportunityContent = styled.div`
     width: auto;
     height: 100%;
     position: relative;
-    left: 300px;
+    // left: 300px;
     padding-bottom: 80px;
 `;
 
@@ -93,7 +98,7 @@ const NewOpportunity = () => {
             name: "Application Details",
             active: true,
             completed: true,
-            component: <div>Application Details</div>,
+            component: <ApplicationDetails />,
         },
         {
             name: "Basic Details",
@@ -105,7 +110,7 @@ const NewOpportunity = () => {
             name: "Opportunity Details",
             active: false,
             completed: false,
-            component: <div>Opportunity Details</div>,
+            component: <OpportunityDetails />,
         },
         {
             name: "Review",
@@ -165,7 +170,14 @@ const NewOpportunity = () => {
                     <Stepper steps={steps} />
                 </NewOpportunitySide>
 
-                <NewOpportunityContent>{content}</NewOpportunityContent>
+                <NewOpportunityContent>
+                    <Grid container>
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={10}>
+                            {content}
+                        </Grid>
+                    </Grid>
+                </NewOpportunityContent>
             </NewOpportunityContainer>
             <NewOpportunityControl>
                 <SaveExistButton>Save & Exist</SaveExistButton>

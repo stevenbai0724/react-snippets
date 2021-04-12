@@ -4,8 +4,6 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Grid, List, ListItem, Typography } from "@material-ui/core";
 import { uniqueId } from "lodash";
 import Calendar from "../components/Calendar";
-import API from "../http";
-
 import {
     configApiRequestToken,
     configAuthToken,
@@ -15,8 +13,9 @@ import {
     login,
     searchEvent,
     setRefreshToken,
+    AuthUser,
 } from "@icontribute-founder/api-wrapper";
-import Calendar from "../components/Calendar";
+
 import OpportunityCard from "../components/OpportunityCard";
 import { dashboardContext } from "../context/dashboardContext";
 import { dashboardCalendarTheme } from "../themes";
@@ -26,7 +25,7 @@ const Dashboard = () => {
     configApiRequestToken(getAccessToken);
     configAuthToken(getRefreshBody, setAccessToken);
     const [events, setEvents] = useState([]);
-    const userAuth = {
+    const userAuth: AuthUser = {
         email: "organization@email.com",
         password: "123456",
         role: "organization",
@@ -65,6 +64,10 @@ const Dashboard = () => {
         new Date(start).toDateString()
     );
 
+    const handleSelectDate = (date: Date) => {
+        console.log(date);
+    };
+
     return (
         <div>
             <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -74,6 +77,7 @@ const Dashboard = () => {
                         <Calendar
                             daysHaveOpportunities={daysHaveOpportunities}
                             theme={dashboardCalendarTheme}
+                            handleSelectDate={handleSelectDate}
                         />
                     </Grid>
                     <Grid item lg={9}>

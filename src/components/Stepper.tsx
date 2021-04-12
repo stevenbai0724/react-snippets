@@ -4,6 +4,9 @@ import styled from "styled-components";
 const StepperContainer = styled.ul`
     list-style: none;
     width: 100px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    padding: 0px;
 `;
 
 const Circle = styled.div<{ active: boolean }>`

@@ -33,7 +33,7 @@ const StyledSubtitle = styled.h5`
     font-size: 14px;
     line-height: 120%;
     color: #676767;
-    margin: 0px;
+    margin: 0px 0px 40px 0px;
 `;
 
 const OpportunityDetails = () => {
@@ -65,8 +65,8 @@ const OpportunityDetails = () => {
     ]);
 
     return (
-        <Box component="div" m={3} mt={1}>
-            <Grid container spacing={5}>
+        <Box component="div" m={3} mt={0}>
+            <Grid container>
                 <Grid item xs={12}>
                     <StyledHeader2>The Opportunity </StyledHeader2>
                     <StyledSubtitle>

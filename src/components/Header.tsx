@@ -109,13 +109,17 @@ const Header = ({ showFilter = true }) => {
         history.push("/new-opportunity");
     };
 
+    const handleLogoClick = () => {
+        history.push("/");
+    };
+
     return (
         <>
             <div className={classes.grow}>
                 <AppBar className={classes.appbar}>
                     <Container fixed>
                         <Toolbar>
-                            <div className="logo">
+                            <div className="logo" onClick={handleLogoClick}>
                                 <h1>iContribute</h1>
                                 <h3 style={{ marginBottom: "2px" }}>
                                     We rise by lifting others.
