@@ -1,77 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
+import styled from "styled-components";
 import { useStaticState, Calendar as CalendarUI } from "@material-ui/pickers";
-import {
-    createMuiTheme,
-    makeStyles,
-    Paper,
-    ThemeProvider,
-} from "@material-ui/core";
+import { Paper, ThemeProvider } from "@material-ui/core";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 
-const useStyle = makeStyles((theme) => ({
-    paper: {
-        overflow: "hidden",
-        width: "fit-content",
-        backgroundColor: "inherit",
-    },
-    dayWithDotContainer: {
-        position: "relative",
-    },
-    dateWithDot: {
-        position: "absolute",
-        height: 0,
-        width: 0,
-        border: "3px solid",
-        borderRadius: 5,
-        borderColor: "#FFBC03",
-        right: "45.5%",
-        transform: "translateX(1px)",
-        top: "73%",
-    },
-}));
+const CalendarPaper = styled(Paper)`
+    overflow: hidden;
+    width: fit-content;
+    background-color: inherit;
+    color: white;
+`;
 
-const calendarTheme = createMuiTheme({
-    spacing: 2,
-    overrides: {
-        MuiPickersDay: {
-            daySelected: {
-                backgroundColor: "#FFBC03",
-                "&:hover": {
-                    backgroundColor: "#FFBC03",
-                },
-            },
-            dayDisabled: {
-                color: "#FFBC03",
-            },
-            current: {
-                color: "#FFBC03",
-            },
-        },
-        MuiTypography: {
-            caption: {
-                color: "black !important",
-            },
-            body1: {
-                fontWeight: 800,
-            },
-        },
-        MuiPickersCalendarHeader: {
-            iconButton: {
-                backgroundColor: "inherit",
-            },
-        },
-    },
-});
+const DayWithDotContainer = styled.div`
+    position: relative;
+`;
 
-const Calendar = ({ daysHaveOpportunities }: any) => {
-    const classes = useStyle();
-    const [selectedDate, setSelectedDate] = useState(new Date());
+const DateWithDot = styled.div`
+    position: absolute;
+    height: 0;
+    width: 0;
+    border: 3px solid;
+    border-radius: 5;
+    border-color: #ffbc03;
+    right: 45.5%;
+    transform: translateX(1px);
+    top: 73%;
+`;
 
+const Calendar = ({
+    daysHaveOpportunities,
+    selectedDate,
+    shouldDisableDate,
+    handleSelectDate,
+    theme = null,
+    disablePast = false,
+}: any) => {
     const handleDateChange = (date: any) => {
-        setSelectedDate(date);
+        handleSelectDate(date.toDate());
     };
-
-    // console.log(selectedDate.toJSON());
 
     const { pickerProps, wrapperProps } = useStaticState({
         value: selectedDate,
@@ -80,7 +46,7 @@ const Calendar = ({ daysHaveOpportunities }: any) => {
 
     function renderDay(
         date: MaterialUiPickersDate,
-        selectedDate: MaterialUiPickersDate,
+        _: MaterialUiPickersDate,
         dayInCurrentMonth: boolean,
         dayComponent: JSX.Element
     ): JSX.Element {
@@ -93,20 +59,33 @@ const Calendar = ({ daysHaveOpportunities }: any) => {
             )
         ) {
             return (
-                <div className={classes.dayWithDotContainer}>
+                <DayWithDotContainer>
                     {dayComponent}
-                    <div className={classes.dateWithDot} />
-                </div>
+                    <DateWithDot />
+                </DayWithDotContainer>
             );
         }
         return dayComponent;
     }
 
-    return (
-        <ThemeProvider theme={calendarTheme}>
-            <Paper className={classes.paper} elevation={0}>
+    if (theme === null) {
+        return (
+            <CalendarPaper elevation={0}>
                 <CalendarUI {...pickerProps} renderDay={renderDay} />
-            </Paper>
+            </CalendarPaper>
+        );
+    }
+
+    return (
+        <ThemeProvider theme={theme}>
+            <CalendarPaper elevation={0}>
+                <CalendarUI
+                    {...pickerProps}
+                    renderDay={renderDay}
+                    disablePast={disablePast}
+                    shouldDisableDate={shouldDisableDate}
+                />
+            </CalendarPaper>
         </ThemeProvider>
     );
 };

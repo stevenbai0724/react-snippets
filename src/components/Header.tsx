@@ -117,7 +117,9 @@ const Header = ({ showFilter = true }) => {
                         <Toolbar>
                             <div className="logo">
                                 <h1>iContribute</h1>
-                                <h3>We rise by lifting others.</h3>
+                                <h3 style={{ marginBottom: "2px" }}>
+                                    We rise by lifting others.
+                                </h3>
                             </div>
                             <div className={classes.search}>
                                 <div className={classes.searchIcon}>

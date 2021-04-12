@@ -4,10 +4,12 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { dashboardContext, intialDashboard } from "../context/dashboardContext";
 import Dashboard from "../views/Dashboard";
+import ApplicationDetail from "../components/ApplicationDetail/ApplicationDetail"
 import Header from "./Header";
 // import Layout from "./Layout";
 import { Hidden } from "@material-ui/core";
 import NewOpportunity from "../views/NewOpportunity";
+import OpportunityDetails from "../views/OpportunityDetails";
 
 const useStyles = makeStyles({
     root: {
@@ -25,6 +27,7 @@ const App = () => {
             <Router>
                 <dashboardContext.Provider value={{ dashboard, setDashboard }}>
                     <Header />
+                    <ApplicationDetail></ApplicationDetail>
                     <Container fixed>
                         <Route exact path="/" component={Dashboard} />
                         <Route
