@@ -6,6 +6,7 @@ import { dashboardContext, intialDashboard } from "../context/dashboardContext";
 import Dashboard from "../views/Dashboard";
 import ApplicationDetail from "../components/ApplicationDetail/ApplicationDetail"
 import Header from "./Header";
+import OpportunityDetails from "../views/OpportunityDetails";
 
 const useStyles = makeStyles({
     root: {
@@ -23,7 +24,8 @@ const App = () => {
                     <Header />
                     <ApplicationDetail></ApplicationDetail>
                     <Container fixed>
-                        <Dashboard />
+                        {/* <Dashboard /> */}
+                        <OpportunityDetails />
                     </Container>
                 </dashboardContext.Provider>
             </Router>
