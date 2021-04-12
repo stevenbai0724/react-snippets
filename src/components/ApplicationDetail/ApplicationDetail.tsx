@@ -35,13 +35,13 @@ const ApplicationDetails = () => {
             header: "iContribute",
             details: "Choose to recieve applications throught iContribute, and we'll store all the opportunity details and provide applicants your email address.",
             button: "Host on iContribute",
-            link: false
+            link: false,
         },
         {
             header: "External Website",
             details: "Have a volunteer opportunity on your website? Provide a link and we'll redirect applicants to your organization's website directly to apply",
             button: "Add Your Site Link",
-            link: true
+            link: true,
         }
     ]);
     

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import TextField from '@material-ui/core/TextField';
+import urlIcon from './img/Union.png';
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
@@ -80,11 +80,15 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         input: {
             border: "3px solid #026896",
+            padding: "0 7px",
             borderRadius: "24px",
+            color: "grey",
+        },
+        hide: {
+            display: "none"
         }
     })
 );
-
 const ApplicationCard = ({ content }: any) => {
     const classes = useStyles();
     const [clicked, setClicked] = useState(false);
@@ -94,8 +98,7 @@ const ApplicationCard = ({ content }: any) => {
     }
     
     return (
-        <Card className={classes.root} onClick={handleClick}>
-
+        <Card className={classes.root} >
             <div className={classes.details}> 
                 <CardContent>
                     <Typography
@@ -111,10 +114,11 @@ const ApplicationCard = ({ content }: any) => {
                         {content.details}
                     </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions onClick={handleClick}>
                     <button className={clicked ? classes.buttonPressed : classes.button}>{content.button}</button>
                 </CardActions>
-                <Input disabled={true} className={classes.input} disableUnderline={true}></Input>
+                
+                {content.link ? <Input className={clicked ? classes.input : classes.hide} placeholder="Paste your link here" disableUnderline={true}/> : <></>}
             </div>
         </Card>
     );
