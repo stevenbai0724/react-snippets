@@ -5,6 +5,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
+import PopOut from "./PopOut"
+import {useState} from 'react'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -81,6 +83,7 @@ const image =
     "https://www.baywardbulletin.ca/wp-content/uploads/2019/07/Bluesfest-873x436.jpg";
 export default function OpportunityCard({ opportunity: content }: any) {
     const classes = useStyles();
+    const [openModal, toggleModal] = useState(false)
     const { companyName, eventName, subtitle, address, start } = content;
     return (
         <Card className={classes.root}>
@@ -121,9 +124,16 @@ export default function OpportunityCard({ opportunity: content }: any) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <button className={classes.button}>View Event</button>
+                    <button className={classes.button} onClick={() => {toggleModal(!openModal)}}>View Event</button>
                 </CardActions>
             </div>
+            <PopOut 
+                modalOpen = {openModal} 
+                onClose = {() => {toggleModal(false)}}
+                
+            >
+                Testing modal
+            </PopOut>
         </Card>
     );
 }
