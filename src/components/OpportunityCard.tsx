@@ -5,7 +5,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
-import PopOut from "./PopOut"
+
 import {useState} from 'react'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -127,13 +127,7 @@ export default function OpportunityCard({ opportunity: content }: any) {
                     <button className={classes.button} onClick={() => {toggleModal(!openModal)}}>View Event</button>
                 </CardActions>
             </div>
-            <PopOut 
-                modalOpen = {openModal} 
-                onClose = {() => {toggleModal(false)}}
-                
-            >
-                Testing modal
-            </PopOut>
+
         </Card>
     );
 }
